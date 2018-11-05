@@ -20,7 +20,7 @@ describe("routes : static", () => {
     it("should return status code 200.  Should accept get request to /marco", (done) => {
         request.get(base2, (err, res, body) => {
             expect(res.statusCode).toBe(200)
-
+            
             done();
         });
     });
