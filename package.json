@@ -1,0 +1,11 @@
+{
+  "name": "social-media",
+  "version": "1.0.0",
+  "description": "A reddit-like application for users to discuss and share content",
+  "main": "src/server.js",
+  "scripts": {
+    "test": "export Node_ENV=test && jasmine"
+  },
+  "author": "",
+  "license": "ISC"
+}
