@@ -10,7 +10,7 @@ describe("routes : static", () => {
                 console.log(`Err: ${err}`)
                 console.log("html Body below...")
                 console.log(body);
-                expect(body).toContain("Welcome 2 Bloccit");
+                expect(body).toContain("hey you guys");
                 done();
             });
         });
