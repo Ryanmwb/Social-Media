@@ -27,12 +27,14 @@ describe("routes : topics", () => {
   
 
     describe("GET /topics", () => {
-        request.get(base, (err, res, body) => {
-            expect(res.statusCode).toBe(200);
-            expect(err).toBeNull();
-            expect(body).toContain("Rules");
-            expect(body).toContain("JS Frameworks");
-            done();
+        it("should return a status code 200 and all rules", (done) => {
+            request.get(base, (err, res, body) => {
+                expect(res.statusCode).toBe(200);
+                expect(err).toBeNull();
+                expect(body).toContain("Rules");
+                expect(body).toContain("JS Frameworks");
+                done();
+            });
         });
     });
 });
