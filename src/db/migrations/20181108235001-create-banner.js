@@ -26,10 +26,10 @@ module.exports = {
         type: Sequelize.INTEGER,
         onDelete: "CASCADE",
         references: {
-          model: "Topic",
+          model: "Topics",
           key: "id",
-          as: "topicId",
-        },    
+          as: "topicId"
+        }
       }
     });
   },
