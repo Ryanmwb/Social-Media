@@ -6,7 +6,7 @@ const Topic = require("../../src/db/models").Topic;
 
 describe("routes : topics", () => {
 
-  /*beforeEach((done) => {
+  beforeEach((done) => {
     this.topic;
     sequelize.sync({force: true}).then((res) => {
 
@@ -25,9 +25,9 @@ describe("routes : topics", () => {
 
     });
 
-  });*/
+  });
 
-  /*describe("GET /topics", () => {
+  describe("GET /topics", () => {
 
     it("should return a status code 200 and all topics", (done) => {
 
@@ -39,5 +39,5 @@ describe("routes : topics", () => {
         done();
       });
     });
-  });*/
+  });
 });
