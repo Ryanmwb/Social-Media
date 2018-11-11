@@ -7,8 +7,6 @@ describe("routes : static", () => {
         it("should return status code 200 and have 'welcome to bloccit' in the body of the response", () => {
             request.get(base, (err, res, body) => {
                 expect(res.statusCode).toBe(200);
-                console.log("html Body below...")
-                //console.log(body);
                 expect(body).toContain("Welcome to Bloccit");
                 //done();
             });
