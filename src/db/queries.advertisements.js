@@ -1,4 +1,4 @@
-const Advertisement = require(".models/").Advertisement;
+const Advertisement = require("./models").Advertisement;
 
 module.exports = {
 
