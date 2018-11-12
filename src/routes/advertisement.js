@@ -2,14 +2,12 @@ const express = require('express');
 const router = express.Router();
 const advertisementController = require('../controllers/advertisementController');
 
-/*
-router.get("/topics", topicController.index);
-router.get("/topics/new", topicController.new);
-router.post("/topics/create", topicController.create);
-router.get("/topics/:id", topicController.show);
-router.post("/topics/:id/destroy", topicController.destroy);
-router.get("/topics/:id/edit", topicController.edit);
-router.post("/topics/:id/update", topicController.update);
-*/
+router.get("/advertisements", advertisementController.index);
+router.get("/advertisements/new", advertisementController.new);
+router.post("/advertisements/create", advertisementController.create);
+router.get("/advertisements/:id", advertisementController.show);
+router.post("/advertisements/:id/destroy", advertisementController.destroy);
+router.get("/advertisements/:id/edit", advertisementController.edit);
+router.post("/advertisements/:id/update", advertisementController.update);
 
 module.exports = router;
