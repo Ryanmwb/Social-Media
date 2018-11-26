@@ -26,7 +26,7 @@ module.exports = {
     })
   },
   getTopic(id, callback){
-    //return Topic.findById(id)
+    //return Topic.findById(id) //checkpoint has this code in along with the following line of code.  I assume this is an error on their part.
     return Topic.findById(id, {
             include: [{
               model: Post,
