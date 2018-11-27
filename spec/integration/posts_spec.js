@@ -100,7 +100,7 @@ describe("routes : posts", () => {
   describe("POST /topics/:topicId/posts/:id/update", () => {
     it("should return a status code 302", (done) => {
       request.post({
-        url: `${base}/${topic.id}/posts/${post.id}/update`,
+        url: `${base}/${this.topic.id}/posts/${this.post.id}/update`,
         form: {
           title: "Snowman Building Competition",
           body: "I love watching them melt slowly."
