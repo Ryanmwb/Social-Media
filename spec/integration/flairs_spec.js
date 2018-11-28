@@ -5,6 +5,7 @@ const base = "http://localhost:3000/topics";
 const sequelize = require("../../src/db/models/index").sequelize;
 const Topic = require("../../src/db/models").Topic;
 const Post = require("../../src/db/models").Post;
+const Flair = require("../../src/db/models").Flair;
 
 describe("routes : posts", () => {
 
@@ -28,11 +29,20 @@ describe("routes : posts", () => {
         })
         .then((post) => {
           this.post = post;
-          done();
+          //done();
+        Flair.create({
+            name: "test flair name",
+            color: "test flair color",
+            postId: this.post.id
+        })
+        .then((flair) => {
+            this.flair = flair;
+            done();
         })
         .catch((err) => {
           console.log(err);
           done();
+        });
         });
       });
     });
@@ -41,21 +51,22 @@ describe("routes : posts", () => {
 
     it("should create a new post and redirect", (done) => {
        const options = {
-         url: `${base}/${this.topic.id}/posts/create`,
+         url: `${base}/posts/${this.post.id}/flairs/create`,
          form: {
-           title: "Watching snow melt",
-           body: "Without a doubt my favoriting things to do besides watching paint dry!"
+           name: "flair name creation test",
+           color: "flair color creation test"
          }
        };
        request.post(options,
          (err, res, body) => {
  
-           Post.findOne({where: {title: "Watching snow melt"}})
-           .then((post) => {
-             expect(post).not.toBeNull();
-             expect(post.title).toBe("Watching snow melt");
-             expect(post.body).toBe("Without a doubt my favoriting things to do besides watching paint dry!");
-             expect(post.topicId).not.toBeNull();
+           Flair.findOne({where: {name: "flair name creation test"}})
+           .then((flair) => {
+             expect(flair).not.toBeNull();
+             expect(flair.name).toBe("flair name creation test");
+             expect(flair.color).toBe("flair color creation test");
+             expect(flair.postId).not.toBeNull();
+             expect(flair.postId).toBe(this.post.id)
              done();
            })
            .catch((err) => {
