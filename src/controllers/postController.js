@@ -19,7 +19,7 @@ module.exports = {
         });
     },
     show(req, res, next){
-        postQueries.getPost(req.params.id, (err, post) => {
+        postQueries.getPost(req.params.postId, (err, post) => {
           if(err || post == null){
             res.redirect(404, "/");
           } else {
@@ -28,16 +28,16 @@ module.exports = {
         });
     },
     destroy(req, res, next){
-        postQueries.deletePost(req.params.id, (err, deletedRecordsCount) => {
+        postQueries.deletePost(req.params.postId, (err, deletedRecordsCount) => {
             if(err){
-                res.redirect(500, `/topics/${req.params.topicId}/posts/${req.params.id}`)
+                res.redirect(500, `/topics/${req.params.topicId}/posts/${req.params.postId}`)
             } else {
                 res.redirect(303, `/topics/${req.params.topicId}`)
             }
         });
     },
     edit(req, res, next){
-        postQueries.getPost(req.params.id, (err, post) => {
+        postQueries.getPost(req.params.postId, (err, post) => {
           if(err || post == null){
             res.redirect(404, "/");
           } else {
@@ -46,11 +46,11 @@ module.exports = {
         });
       },
     update(req, res, next){
-        postQueries.updatePost(req.params.id, req.body, (err, post) => {
+        postQueries.updatePost(req.params.postId, req.body, (err, post) => {
           if(err || post == null){
-            res.redirect(404, `/topics/${req.params.topicId}/posts/${req.params.id}/edit`);
+            res.redirect(404, `/topics/${req.params.topicId}/posts/${req.params.postId}/edit`);
           } else {
-            res.redirect(`/topics/${req.params.topicId}/posts/${req.params.id}`);
+            res.redirect(`/topics/${req.params.topicId}/posts/${req.params.postId}`);
           }
         });
     }
