@@ -12,6 +12,7 @@ module.exports = {
         };
         flairQueries.addFlair(newFlair, (err, flair) => {
             if(err){
+                console.log("The error is below...")
                 console.log(err);
                 res.redirect(500, `/posts/${req.params.postId}/flairs/new`);
             } else {
