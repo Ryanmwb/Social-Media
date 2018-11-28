@@ -10,5 +10,4 @@ router.post("/posts/:postId/flairs/:flairId/destroy", flairController.destroy);
 router.get("/posts/:postId/flairs/:flairId/edit", flairController.edit);
 router.post("/posts/:postId/flairs/:flairId/update", flairController.update);
 
-
 module.exports = router;

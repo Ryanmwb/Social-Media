@@ -1,6 +1,6 @@
 const request = require("request");
 const server = require("../../src/server");
-const base = "http://localhost:3000/topics";
+const base = "http://localhost:3000/";
 
 const sequelize = require("../../src/db/models/index").sequelize;
 const Topic = require("../../src/db/models").Topic;
@@ -40,6 +40,7 @@ describe("routes : posts", () => {
             done();
         })
         .catch((err) => {
+          console.log("before each err below...")
           console.log(err);
           done();
         });
@@ -47,21 +48,36 @@ describe("routes : posts", () => {
       });
     });
   });
-  describe("POST /topics/:topicId/posts/create", () => {
+  describe("POST /posts/postId/flairs/create", () => {
 
     it("should create a new post and redirect", (done) => {
        const options = {
-         url: `${base}/posts/${this.post.id}/flairs/create`,
+         url: `${base}posts/${this.post.id}/flairs/create`,
          form: {
            name: "flair name creation test",
-           color: "flair color creation test"
+           color: "flair color creation test",
+           postId: this.post.id
          }
        };
        request.post(options,
          (err, res, body) => {
- 
            Flair.findOne({where: {name: "flair name creation test"}})
            .then((flair) => {
+            console.log("/////")
+            console.log("res is below")
+            console.log(res)
+           console.log("//////")
+           console.log("Option is below")
+           console.log(options)
+            console.log("////")
+            console.log("flair found with the .findOne method")
+             console.log(flair)
+             console.log("////")
+             console.log("this.post below")
+             console.log(this.post)
+             console.log("////")
+             console.log("this.flair below")
+             console.log(this.flair)
              expect(flair).not.toBeNull();
              expect(flair.name).toBe("flair name creation test");
              expect(flair.color).toBe("flair color creation test");

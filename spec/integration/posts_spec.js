@@ -129,6 +129,5 @@ describe("routes : posts", () => {
           });
         });
     });
-
   });
 });
