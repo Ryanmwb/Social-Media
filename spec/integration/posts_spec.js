@@ -21,7 +21,7 @@ describe("routes : posts", () => {
       })
       .then((topic) => {
         User.create({
-          email: "ryanmwbb#gmail.com",
+          email: "ryanmwbb@gmail.com",
           password: "al;kjz654654"
         })
         .then((user) => {
@@ -44,7 +44,7 @@ describe("routes : posts", () => {
       });
     });
   });
-  describe("POST /topics/:topicId/posts/create", () => {
+  /*describe("POST /topics/:topicId/posts/create", () => {
 
     it("should create a new post and redirect", (done) => {
        const options = {
@@ -72,8 +72,8 @@ describe("routes : posts", () => {
          }
        );
      });
-  });
-  describe("GET /topics/:topicId/posts/:id", () => {
+  });*/
+  /*describe("GET /topics/:topicId/posts/:id", () => {
     it("should render a view with the selected post", (done) => {
       request.get(`${base}/${this.topic.id}/posts/${this.post.id}`, (err, res, body) => {
         expect(err).toBeNull();
@@ -81,8 +81,8 @@ describe("routes : posts", () => {
         done();
       });
     });
-  });
-  describe("POST /topics/:topicId/posts/:id/destroy", () => {
+  });*/
+  /*describe("POST /topics/:topicId/posts/:id/destroy", () => {
     it("should delete the post with the associated ID", (done) => {
       //expect(post.id).toBe(1);
       request.post(`${base}/${this.topic.id}/posts/${this.post.id}/destroy`, (err, res, body) => {
@@ -94,7 +94,7 @@ describe("routes : posts", () => {
         })
       });
     });
-  });
+  });*/
   describe("GET /topics/:topicId/posts/:id/edit", () => {
     it("should render a view with an edit post form", (done) => {
       request.get(`${base}/${this.topic.id}/posts/${this.post.id}/edit`, (err, res, body) => {
@@ -105,7 +105,7 @@ describe("routes : posts", () => {
       });
     });
   });
-  describe("POST /topics/:topicId/posts/:id/update", () => {
+  /*describe("POST /topics/:topicId/posts/:id/update", () => {
     it("should return a status code 302", (done) => {
       request.post({
         url: `${base}/${this.topic.id}/posts/${this.post.id}/update`,
@@ -138,8 +138,8 @@ describe("routes : posts", () => {
           });
         });
     });
-  });
-  it("should not create a new post that fails validations", (done) => {
+  });*/
+  /*it("should not create a new post that fails validations", (done) => {
     const options = {
       url: `${base}/${this.topic.id}/posts/create`,
       form: {
@@ -160,5 +160,5 @@ describe("routes : posts", () => {
         });
       }
     );
-  });
+  });*/
 });
