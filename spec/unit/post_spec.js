@@ -46,7 +46,8 @@ describe("Post", () => {
       Post.create({
         title: "Pros of Cryosleep during the long journey",
         body: "1. Not having to answer the 'are we there yet?' question.",
-        topicId: this.topic.id
+        topicId: this.topic.id,
+        userId: this.user.id
       })
       .then((post) => {
         expect(post.title).toBe("Pros of Cryosleep during the long journey");
@@ -54,7 +55,8 @@ describe("Post", () => {
         done();
       })
       .catch((err) => {
-        console.log(err);
+        //console.log(err);
+        fail(err);
         done();
       });
     });
