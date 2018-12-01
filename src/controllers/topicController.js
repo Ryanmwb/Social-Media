@@ -59,7 +59,12 @@ module.exports = {
     destroy(req, res, next){
         topicQueries.deleteTopic(req, (err, topic) => {
             if(err){
-                res.redirect(err, `/topics/${req.params.id}`)
+                //console.log("topicController destroy err right below...")
+                //console.log(err)
+                res.redirect(
+                    typeof err === "number" ? err : 500,
+                    `/topics/${req.params.id}`
+                  );
             } else {
                 res.redirect(303, "/topics")
             }

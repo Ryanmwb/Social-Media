@@ -5,6 +5,7 @@ module.exports = {
         const postRoutes = require("../routes/posts");
         const userRoutes = require("../routes/users");
         if(process.env.NODE_ENV === "test") {
+            //console.log("ACTIVATING MOCK AUTH");
             const mockAuth = require("../../spec/support/mock-auth.js");
             mockAuth.fakeIt(app);
         }
