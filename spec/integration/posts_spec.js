@@ -99,10 +99,14 @@ describe("routes : posts", () => {
   });*/
   describe("GET /topics/:topicId/posts/:id/edit", () => {
     it("should render a view with an edit post form", (done) => {
+      console.log("post -> ")
+      console.log(this.post)
+      console.log("topic -> " + this.topic)
+      console.log(this.topic)
       request.get(`${base}/${this.topic.id}/posts/${this.post.id}/edit`, (err, res, body) => {
-        expect(err).toBeNull();
         expect(body).toContain("Edit Post");
         expect(body).toContain("Snowball Fighting");
+        expect(err).toBeNull();
         done();
       });
     });
