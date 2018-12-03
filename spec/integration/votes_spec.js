@@ -54,9 +54,6 @@ describe("routes : votes", () => {
     });
   });
 
-  // test suites go here
-  beforeEach((done) => { /* code here */ });
-
    // #1
    describe("guest attempting to vote on a post", () => {
 
@@ -71,9 +68,7 @@ describe("routes : votes", () => {
            done();
          }
        );
-
-     });
-
+     })
      describe("GET /topics/:topicId/posts/:postId/votes/upvote", () => {
 
        it("should not create a new vote", (done) => {
@@ -99,7 +94,6 @@ describe("routes : votes", () => {
            }
          );
        });
-
      });
    });
    describe("signed in user voting on a post", () => {
@@ -116,7 +110,7 @@ describe("routes : votes", () => {
           done();
         }
       );
-    });
+    })
 
     describe("GET /topics/:topicId/posts/:postId/votes/upvote", () => {
 
@@ -177,6 +171,53 @@ describe("routes : votes", () => {
         );
       });
     });
-
+    describe("create a vote ", () => {
+      it("with a value other than 1 or -1.  Should not be successful.", (done) => {
+        Vote.create({
+          value: 10,
+          userId: this.user.id,
+          postId: this.post.id
+        })
+        .then((vote) => {
+          expect(vote).toBeNull();
+          done();
+        })
+        .catch((err) => {
+          console.log(err);
+          done();
+        })
+      })
+      it(", then another vote on the same post.", (done) => {
+        Post.create({
+          title: "Hey there guys!",
+          body: "Hey there ladies!",
+          topicId: 7,
+          userId: 8,
+          id: 10
+        })
+        Vote.create({
+          value: 1,
+          userId: this.user.id,
+          postId: 10,
+          id: 2
+        });
+        Vote.create({
+          value: 1,
+          userId: this.user.id,
+          postId: 10,
+          id: 3
+        });
+        Vote.findAll({where: {postId: 10}})
+        .then((votes) => {
+          console.log(votes)
+          expect(votes).toBe(1);
+          done();
+        })
+        .catch((err) => {
+          console.log(err);
+          done();
+        })
+      })
+    });
   }); //end context for signed in user
 });
