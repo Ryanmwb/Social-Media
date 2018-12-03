@@ -199,13 +199,83 @@ describe("routes : comments", () => {
                   expect(comments.length).toBe(commentCountBeforeDelete - 1);
                   done();
                 })
-   
               });
             })
-   
           });
-   
         });
-   
       }); //end context for signed in user
+      describe("POST /topics/:topicId/posts/:postId/comments/delete", () => {
+        beforeEach((done) => {    // before each suite in this context
+          request.get({           // mock authentication
+            url: "http://localhost:3000/auth/fake",
+            form: {
+              role: "admin",     // mock authenticate as member user
+              userId: 10
+            }
+          },
+            (err, res, body) => {
+              done();
+            }
+          );
+        });
+        
+        it("admin should be able to delete selected comment", (done) => {
+          const options = {
+            url: `${base}${this.topic.id}/posts/${this.post.id}/comments/${this.comment.id}/destroy`,
+            form: {
+              body: "This comment is great!"
+            }
+          };
+          request.post(options,
+            (err, res, body) => {
+              Comment.findOne({where: {body: "This comment is great!"}})
+              .then((comment) => {
+                expect(comment).toBeNull();
+                expect(err).toBeNull();
+                done();
+              })
+              .catch((err) => {
+                console.log(err);
+                done();
+              })
+            })
+        });
+      });
+      describe("POST /topics/:topicId/posts/:postId/comments/delete", () => {
+        beforeEach((done) => {    // before each suite in this context
+          request.get({           // mock authentication
+            url: "http://localhost:3000/auth/fake",
+            form: {
+              role: "admin",     // mock authenticate as member user
+              userId: 10
+            }
+          },
+            (err, res, body) => {
+              done();
+            }
+          );
+        });
+        
+        it("admin should be able to delete selected comment", (done) => {
+          const options = {
+            url: `${base}${this.topic.id}/posts/${this.post.id}/comments/${this.comment.id}/destroy`,
+            form: {
+              body: "This comment is great!"
+            }
+          };
+          request.post(options,
+            (err, res, body) => {
+              Comment.findOne({where: {body: "This comment is great!"}})
+              .then((comment) => {
+                expect(comment).toBeNull();
+                expect(err).toBeNull();
+                done();
+              })
+              .catch((err) => {
+                console.log(err);
+                done();
+              })
+            })
+        });
+      });
 });
