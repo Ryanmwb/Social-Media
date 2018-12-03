@@ -222,13 +222,10 @@ describe("routes : comments", () => {
         it("admin should be able to delete selected comment", (done) => {
           const options = {
             url: `${base}${this.topic.id}/posts/${this.post.id}/comments/${this.comment.id}/destroy`,
-            form: {
-              body: "This comment is great!"
-            }
           };
           request.post(options,
             (err, res, body) => {
-              Comment.findOne({where: {body: "This comment is great!"}})
+              Comment.findOne({where: {body: "ay caramba!!!!!"}})
               .then((comment) => {
                 expect(comment).toBeNull();
                 expect(err).toBeNull();
@@ -246,8 +243,8 @@ describe("routes : comments", () => {
           request.get({           // mock authentication
             url: "http://localhost:3000/auth/fake",
             form: {
-              role: "admin",     // mock authenticate as member user
-              userId: 10
+              role: "member",     // mock authenticate as member user
+              userId: 11
             }
           },
             (err, res, body) => {
@@ -256,18 +253,15 @@ describe("routes : comments", () => {
           );
         });
         
-        it("admin should be able to delete selected comment", (done) => {
+        it("member should not be able to delete another member's selected comment", (done) => {
           const options = {
             url: `${base}${this.topic.id}/posts/${this.post.id}/comments/${this.comment.id}/destroy`,
-            form: {
-              body: "This comment is great!"
-            }
           };
           request.post(options,
             (err, res, body) => {
-              Comment.findOne({where: {body: "This comment is great!"}})
+              Comment.findOne({where: {body: "ay caramba!!!!!"}})
               .then((comment) => {
-                expect(comment).toBeNull();
+                expect(comment.body).toBe("ay caramba!!!!!")
                 expect(err).toBeNull();
                 done();
               })
