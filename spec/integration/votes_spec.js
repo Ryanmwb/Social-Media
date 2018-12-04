@@ -172,7 +172,7 @@ describe("routes : votes", () => {
       });
     });
     describe("create a vote ", () => {
-      it("with a value other than 1 or -1.  Should not be successful.", (done) => {
+      it("with a value other than 1 or -1.  Should not be successful.", (done) => { //test 1
         Vote.create({
           value: 10,
           userId: this.user.id,
@@ -183,35 +183,53 @@ describe("routes : votes", () => {
           done();
         })
         .catch((err) => {
-          console.log(err);
+          //console.log(err);
           done();
         })
       })
-      it(", then another vote on the same post.", (done) => {
+      it(", then another vote on the same post.", (done) => { // test 2
         Post.create({
           title: "Hey there guys!",
           body: "Hey there ladies!",
-          topicId: 7,
-          userId: 8,
+          topicId: this.topic.id,
+          userId: this.user.id,
           id: 10
         })
-        Vote.create({
-          value: 1,
-          userId: this.user.id,
-          postId: 10,
-          id: 2
-        });
-        Vote.create({
-          value: 1,
-          userId: this.user.id,
-          postId: 10,
-          id: 3
-        });
-        Vote.findAll({where: {postId: 10}})
-        .then((votes) => {
-          console.log(votes)
-          expect(votes).toBe(1);
-          done();
+        .then((post) => {
+          Vote.create({
+            value: 1,
+            userId: this.user.id,
+            postId: post.id,
+            id: 3
+          })
+          .then((vote1) => {
+            Vote.create({
+              value: 1,
+              userId: this.user.id,
+              postId: post.id,
+              id: 4
+            })
+            .then((vote2) => {
+              Vote.findAll({where: {postId: vote2.postId}})
+              .then((votes) => {
+                expect(votes.length).toBe(1)
+                console.log(votes)
+                done()
+                /*.then(() => {
+                  Vote.destroy({where: {id: [3,4]}})
+                  /*.then(() => {
+                    Vote.findAll({where: {postId: 10}})
+                    .then((votes) => {
+                      console.log("Votes below")
+                      console.log(votes)
+                      done();
+                    })
+                  })
+                  done();
+                })*/
+              })
+            })
+          })
         })
         .catch((err) => {
           console.log(err);
@@ -220,4 +238,21 @@ describe("routes : votes", () => {
       })
     });
   }); //end context for signed in user
+  describe("#getPoints method", () => { //test 3
+    it("should return integer value", (done)=> {
+      Vote.create({
+        value: 1,
+        postId: this.post.id,
+        userId: this.user.id
+      })
+      .then((vote) => {
+        var points = this.post.getPoints();
+        expect(points).toBeGreaterThan(0)
+        done()
+      })
+      .catch((err) => {
+        done()
+      })
+    })
+  })
 });
