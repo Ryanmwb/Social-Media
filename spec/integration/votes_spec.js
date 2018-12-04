@@ -215,18 +215,6 @@ describe("routes : votes", () => {
                 expect(votes.length).toBe(1)
                 console.log(votes)
                 done()
-                /*.then(() => {
-                  Vote.destroy({where: {id: [3,4]}})
-                  /*.then(() => {
-                    Vote.findAll({where: {postId: 10}})
-                    .then((votes) => {
-                      console.log("Votes below")
-                      console.log(votes)
-                      done();
-                    })
-                  })
-                  done();
-                })*/
               })
             })
           })
