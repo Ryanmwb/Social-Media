@@ -188,6 +188,7 @@ describe("routes : votes", () => {
         })
       })
       it(", then another vote on the same post.", (done) => { // test 2 
+        console.log("hi");
         const optionsVote = {
             url: `${base}${this.topic.id}/posts/10/votes/upvote`
         };
@@ -207,7 +208,7 @@ describe("routes : votes", () => {
             userId: this.user.id,
             id: 10
         })
-        .then((post) => {
+        .then(() => {
             request.get(optionsVote, (err, res, body) => {
                 console.log("Creating 1...");
                 console.log(body);
@@ -254,13 +255,31 @@ describe("routes : votes", () => {
       })
     })
   })
-  describe("hasUpvoteFor() method", () => {
+  /*describe("hasUpvoteFor() method", () => {
     it("should return a value of true", (done) => {
       const optionsVote = {
         url: `${base}${this.topic.id}/posts/10/votes/upvote`
-    };
-    };
-    request.
+      };
+      request.get(optionsVote, (err, res, body) => {
+        Vote.getUpvoteFor(10) // this method would have an argument of 'postId' which would have retrieved the true or false value.
+        .then((getUpvote) => {
+          expect(getUpvote).toBe(true);
+        })
+      })
     })
-  })
+  })*/
+  /*describe("hasUpvoteFor() method", () => {
+    it("should return a value of true", (done) => {
+      const optionsVote = {
+        url: `${base}${this.topic.id}/posts/10/votes/downvote`
+      };
+      request.get(optionsVote, (err, res, body) => {
+        Vote.getDownvoteFor(10) // this method would have an argument of 'postId' which would have retrieved the true or false value.
+        .then((getDownvote) => {
+          expect(getDownvote).toBe(true);
+        })
+      })
+    })
+  })*/
 });
+
