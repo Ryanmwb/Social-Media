@@ -255,6 +255,8 @@ describe("routes : votes", () => {
       })
     })
   })
+
+  // below are two tests created for the voting exercise that don't have methods mentioned in the exercise.
   /*describe("hasUpvoteFor() method", () => {
     it("should return a value of true", (done) => {
       const optionsVote = {
