@@ -166,4 +166,65 @@ describe("Favorite", () => {
           });
         });
       });
+
+      describe("#setPost()", () => {
+
+        it("should associate a post and a favorite together", (done) => {
+   
+          Favorite.create({           // create a favorite on `this.post`
+            postId: this.post.id,
+            userId: this.user.id
+          })
+          .then((favorite) => {
+            this.favorite = favorite;     // store it
+   
+            Post.create({         // create a new post
+              title: "Dress code on Proxima b",
+              body: "Spacesuit, space helmet, space boots, and space gloves",
+              topicId: this.topic.id,
+              userId: this.user.id
+            })
+            .then((newPost) => {
+   
+              expect(this.favorite.postId).toBe(this.post.id); // check favorite not associated with newPost
+   
+              this.favorite.setPost(newPost)              // update post reference for favorite
+              .then((favorite) => {
+   
+                expect(favorite.postId).toBe(newPost.id); // ensure it was updated
+                done();
+   
+              });
+            })
+            .catch((err) => {
+              console.log(err);
+              done();
+            });
+          });
+        });
+   
+      });
+   
+    // #2
+      describe("#getPost()", () => {
+   
+        it("should return the associated post", (done) => {
+          Favorite.create({
+            userId: this.user.id,
+            postId: this.post.id
+          })
+          .then((favorite) => {
+            this.comment.getPost()
+            .then((associatedPost) => {
+              expect(associatedPost.title).toBe("My first visit to Proxima Centauri b");
+              done();
+            });
+          })
+          .catch((err) => {
+            console.log(err);
+            done();
+          });
+        });
+   
+      });
 });

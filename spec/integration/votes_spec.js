@@ -228,8 +228,7 @@ describe("routes : votes", () => {
                         done();
                     })
                 })
-            })
-            done();        
+            })       
         })
         .catch((err) => {
             console.log(err);
