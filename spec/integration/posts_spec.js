@@ -22,7 +22,6 @@ describe("routes : posts", () => {
       })
       .then((user) => {
         this.user = user;
-
         Topic.create({
           title: "Winter Games",
           description: "Post your Winter Games stories.",

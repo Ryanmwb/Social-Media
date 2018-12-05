@@ -187,43 +187,54 @@ describe("routes : votes", () => {
           done();
         })
       })
-      it(", then another vote on the same post.", (done) => { // test 2
+      it(", then another vote on the same post.", (done) => { // test 2 
+        const optionsVote = {
+            url: `${base}${this.topic.id}/posts/10/votes/upvote`
+        };
+        const optionsPost = {
+            url: `${base}${this.topic.id}/posts/new`,
+            form: {
+              id: 10,
+              userId: this.user.id,
+              body: "This is the bodyyyy....",
+              title: "This is the tittlellee"
+            }
+        };
         Post.create({
-          title: "Hey there guys!",
-          body: "Hey there ladies!",
-          topicId: this.topic.id,
-          userId: this.user.id,
-          id: 10
+            title: "Hey there guys!",
+            body: "Hey there ladies!",
+            topicId: this.topic.id,
+            userId: this.user.id,
+            id: 10
         })
         .then((post) => {
-          Vote.create({
-            value: 1,
-            userId: this.user.id,
-            postId: post.id,
-            id: 3
-          })
-          .then((vote1) => {
-            Vote.create({
-              value: 1,
-              userId: this.user.id,
-              postId: post.id,
-              id: 4
+            request.get(optionsVote, (err, res, body) => {
+                console.log("Creating 1...");
+                console.log(body);
+                request.get(optionsVote, (err, res, body) => {
+                    console.log("Creating 2...");
+                    console.log(body);
+                    Vote.findAll({
+                        where: {
+                            postId: this.post.id
+                        }
+                    })
+                    .then((votes) => {
+                        console.log(votes);
+                        expect(votes.length).toBe(1);
+                        console.log("this.user below");
+                        console.log(this.user);
+                        done();
+                    })
+                })
             })
-            .then((vote2) => {
-              Vote.findAll({where: {postId: vote2.postId}})
-              .then((votes) => {
-                expect(votes.length).toBe(1)
-                console.log(votes)
-                done()
-              })
-            })
-          })
+            done();        
         })
         .catch((err) => {
-          console.log(err);
-          done();
+            console.log(err);
+            done();
         })
-      })
+    })
     });
   }); //end context for signed in user
   describe("#getPoints method", () => { //test 3
@@ -241,6 +252,15 @@ describe("routes : votes", () => {
       .catch((err) => {
         done()
       })
+    })
+  })
+  describe("hasUpvoteFor() method", () => {
+    it("should return a value of true", (done) => {
+      const optionsVote = {
+        url: `${base}${this.topic.id}/posts/10/votes/upvote`
+    };
+    };
+    request.
     })
   })
 });
