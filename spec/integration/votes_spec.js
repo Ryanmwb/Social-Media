@@ -187,7 +187,7 @@ describe("routes : votes", () => {
           done();
         })
       })
-      it(", then another vote on the same post.", (done) => { // test 2 
+      /*it(", then another vote on the same post.", (done) => { // test 2 
         console.log("hi");
         const optionsVote = {
             url: `${base}${this.topic.id}/posts/10/votes/upvote`
@@ -235,10 +235,10 @@ describe("routes : votes", () => {
             console.log(err);
             done();
         })
-    })
+    })*/
     });
   }); //end context for signed in user
-  describe("#getPoints method", () => { //test 3
+  /*describe("#getPoints method", () => { //test 3
     it("should return integer value", (done)=> {
       Vote.create({
         value: 1,
@@ -254,7 +254,7 @@ describe("routes : votes", () => {
         done()
       })
     })
-  })
+  })*/
 
   // below are two tests created for the voting exercise that don't have methods mentioned in the exercise.
   /*describe("hasUpvoteFor() method", () => {
