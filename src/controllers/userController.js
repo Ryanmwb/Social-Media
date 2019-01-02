@@ -52,7 +52,6 @@ module.exports = {
              req.flash("notice", "No user found with that ID.");
              res.redirect("/");
            } else {
-     
         // #3
              res.render("users/show", {...result});
            }
